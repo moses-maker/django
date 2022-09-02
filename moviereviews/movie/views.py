@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Movie
 # Create your views here.
@@ -10,7 +10,7 @@ def home(request):
         movies = Movie.objects.filter(title__icontains=search_term)
     else:
         movies = Movie.objects.all()
-    return render(request, 'home.html', {'name': 'Moses', 'search_term': search_term, 'movies': movies})
+    return render(request, 'home.html', {'search_term': search_term, 'movies': movies})
 
 
 def about(request):
@@ -21,3 +21,8 @@ def about(request):
 def signup(request):
     email = request.GET.get('email')
     return render(request, 'signup.html', {'email': email})
+
+
+def detail(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    return render(request, 'detail.html', {'movie': movie})

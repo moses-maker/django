@@ -6,8 +6,12 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('movie.urls')),
+
+    path('movie/', include('movie.urls')),
     path('news/', include('news.urls')),
+    path('accounts/', include('accounts.urls')),
+
+
     path('about/', views.about, name="about"),
     path('signup/', views.signup, name="signup"),
 
